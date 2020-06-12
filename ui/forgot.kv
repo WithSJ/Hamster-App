@@ -1,0 +1,49 @@
+#:kivy 1.0
+#:import APP_NAME config.APP_NAME
+#:import COMPANY_NAME config.COMPANY_NAME
+MDScreen:
+    name: "forgot"
+    MDLabel:
+        text: APP_NAME
+        halign: "center"
+        pos_hint: {"center_y": .8}
+        font_style: "H3"
+    
+    MDLabel:
+        text: "Forgot Password"
+        halign: "center"
+        pos_hint: {"center_y":.73}
+        font_style: "Subtitle2"
+        
+    MDTextField:
+        hint_text: "Username or Email"
+        pos_hint: {"center_x": 0.5, "center_y": 0.6}
+        size_hint: .75,0.08
+        # mode: "rectangle"
+
+    MDRaisedButton:
+        text: "Forgot Password"
+        pos_hint: {"center_x": 0.5, "center_y":0.5}
+        size_hint: .7,0.05
+        on_release: app.change_screen("verification")
+
+    MDTextButton:
+        text: f"[color=#000000]Don't have an account?[/color] Sign up"
+        markup: True
+        pos_hint: {"center_x":0.5, "center_y":0.4}
+        on_release: app.change_screen("signup")
+    
+    MDTextButton:
+        text: f"[b][color=#000000]Back To[/color] Login[/b]"
+        markup: True
+        pos_hint: {"center_x":0.5, "center_y":0.33}
+        on_release: app.change_screen("login")
+    
+    MDLabel:
+        text: f"[font=Icons] {md_icons['copyright']}[/font]  [font=Roboto]{COMPANY_NAME} 2020[/font]"
+        markup: True
+        halign: "center"
+        pos_hint: {"center_y":0.05}
+        
+        
+        

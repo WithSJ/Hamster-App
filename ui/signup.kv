@@ -1,0 +1,61 @@
+#:kivy 1.0
+#:import APP_NAME config.APP_NAME
+#:import COMPANY_NAME config.COMPANY_NAME
+MDScreen:
+    name: "signup"
+    MDLabel:
+        text: APP_NAME
+        halign: "center"
+        pos_hint: {"center_y": .8}
+        font_style: "H3"
+    
+    MDLabel:
+        text: "Sign up"
+        halign: "center"
+        pos_hint: {"center_y":.73}
+        font_style: "Subtitle2"
+        
+    MDTextField:
+        hint_text: "Email"
+        pos_hint: {"center_x": 0.5, "center_y": 0.65}
+        size_hint: .75,0.08
+        # mode: "rectangle"
+    
+    MDTextField:
+        hint_text: "Fullname"
+        pos_hint: {"center_x":0.5, "center_y":0.57}
+        size_hint: .75,0.08
+        # mode: "rectangle"
+    
+    MDTextField:
+        hint_text: "Username"
+        pos_hint: {"center_x":0.5, "center_y":0.49}
+        size_hint: .75,0.08
+        # mode: "rectangle"
+    
+    MDTextField:
+        hint_text: "Password"
+        pos_hint: {"center_x":0.5, "center_y":0.41}
+        size_hint: .75,0.08
+        password: True
+        # mode: "rectangle"
+    
+    MDRaisedButton:
+        text: "Sign up"
+        pos_hint: {"center_x": 0.5, "center_y":0.31}
+        size_hint: .7,0.05
+    
+    MDTextButton:
+        text: f"[color=#000000]Have an account?[/color] Log in"
+        markup: True
+        pos_hint: {"center_x":0.5, "center_y":0.22}
+        on_release: app.change_screen("login")
+    
+    MDLabel:
+        text: f"[font=Icons] {md_icons['copyright']}[/font]  [font=Roboto]{COMPANY_NAME} 2020[/font]"
+        markup: True
+        halign: "center"
+        pos_hint: {"center_y":0.05}
+        
+        
+        

@@ -1,0 +1,27 @@
+#:kivy 1.0
+#:import APP_NAME config.APP_NAME
+#:import COMPANY_NAME config.COMPANY_NAME
+<Tabs>:
+    MDIconButton:
+        id: icon
+        icon: 'account'
+        user_font_size: "48sp"
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+
+MDScreen:
+    name: "home"
+    BoxLayout:
+        orientation:'vertical'
+
+        MDToolbar:
+            title: APP_NAME
+        MDTabs:
+            id: android_tabs
+            
+            Tabs:
+                text: f"Messages"
+            Tabs:
+                text: "Contacts"
+                font_style: 'Subtitle2'
+
