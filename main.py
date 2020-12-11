@@ -1,8 +1,3 @@
-# Fixed Screen size as android screen
-from kivy.config import Config
-Config.set('graphics', 'width', '360')
-Config.set('graphics', 'height', '740')
-# remove both line when build App
 
 from kivymd.app import MDApp
 from kivy.lang import Builder
