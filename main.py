@@ -62,8 +62,7 @@ class HamsterApp(MDApp):
         screen_manager.add_widget(Builder.load_file("ui//forgot.kv"))
         screen_manager.add_widget(Builder.load_file("ui//verification.kv"))
         screen_manager.add_widget(Builder.load_file("ui//home.kv")) 
-        screen_manager.add_widget(Builder.load_file("ui//profile.kv"))        
-        self.change_screen("profile")
+        screen_manager.add_widget(Builder.load_file("ui//profile.kv"))
         return screen_manager
 
 if __name__ == "__main__":
