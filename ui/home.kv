@@ -1,12 +1,5 @@
 #:import APP_NAME config.APP_NAME
 #:import COMPANY_NAME config.COMPANY_NAME
-<Tabs>:
-    MDIconButton:
-        id: icon
-        icon: 'account'
-        user_font_size: "48sp"
-        pos_hint: {"center_x": .5, "center_y": .5}
-
 
 MDScreen:
     name: "home"
@@ -15,12 +8,24 @@ MDScreen:
 
         MDToolbar:
             title: APP_NAME
-        MDTabs:
+            size_hint: 1,.08
+            right_action_items: [ ["clock", lambda x:app.all_chats()]] 
+            #button for add more dummpy chats
+            elevation: 5
+        
+        MDBottomNavigation:
             id: android_tabs
             
-            Tabs:
-                text: f"Messages"
-            Tabs:
-                text: "Contacts"
-                font_style: 'Subtitle2'
-
+            MDBottomNavigationItem:        
+                name: "chat_scr"
+                text: f"CHATS"
+                icon: "chat"
+                ScrollView:
+                    MDList:
+                        id: chat_tab
+        
+            MDBottomNavigationItem:
+                name: "search_scr"
+                text: f"SEARCH"
+                icon: "account-search"
+                
