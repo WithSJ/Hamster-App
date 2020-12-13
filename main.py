@@ -1,4 +1,10 @@
 
+from kivy.utils import platform
+if platform != 'android':
+    from kivy.config import Config
+    Config.set("graphics","width",360)
+    Config.set("graphics","height",740)
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager
@@ -33,6 +39,18 @@ class HamsterApp(MDApp):
             
             screen_manager.get_screen("home").ids.chat_tab.add_widget(twolineW)
         #  ----- ] end dummy chats
+
+    def search_account(self,search_field):
+        # for dummy search item [------
+        
+        twolineW= TwoLineAvatarListItem(text=f"{search_field}",
+            secondary_text=f"Hamster text for {search_field}")
+
+        twolineW.add_widget(ImageLeftWidget(source="hamster_icon.png"))
+        
+        screen_manager.get_screen("home").ids.search_items.add_widget(twolineW)
+        # #  ----- ] end dummy search
+
 
     def build(self):
         self.theme_cls.theme_style="Light"

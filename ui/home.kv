@@ -28,4 +28,36 @@ MDScreen:
                 name: "search_scr"
                 text: f"SEARCH"
                 icon: "account-search"
-                
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(5)
+                    padding: dp(10)
+
+                    MDBoxLayout:
+                        adaptive_height: True
+
+                        MDTextField:
+                            id: search_field
+                            hint_text: 'Search'
+                            # on_text: root.set_list_md_icons(self.text, True)
+                        
+                        MDIconButton:
+                            icon: 'magnify'
+                            on_release: app.search_account(search_field.text)
+
+                    ScrollView:
+                        MDList:
+                            id: search_items
+                    # RecycleView:
+                    #     id: search_items
+                    #     key_viewclass: 'viewclass'
+                    #     key_size: 'height'
+
+                    #     RecycleBoxLayout:
+                    #         padding: dp(10)
+                    #         default_size: None, dp(48)
+                    #         default_size_hint: 1, None
+                    #         size_hint_y: None
+                    #         height: self.minimum_height
+                    #         orientation: 'vertical'
