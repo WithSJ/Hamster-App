@@ -1,0 +1,60 @@
+#:import APP_NAME config.APP_NAME
+#:import COMPANY_NAME config.COMPANY_NAME
+
+MDScreen:
+    name: "profile"
+    BoxLayout:
+        orientation:'vertical'
+
+        MDToolbar:
+            id:profile_bar
+            title: "Profile"
+            size_hint: 1,.08
+            left_action_items: [ ["arrow-left", lambda x:app.change_screen("home")]] 
+        
+        BoxLayout:
+            spacing: dp(5)
+            padding: dp(5)
+            orientation:'vertical'
+
+            Widget:
+                canvas:
+                    Ellipse:
+                        pos: profile_bar.size[0]//2-70,profile_bar.pos[1]-160
+                        size: 140 , 140 
+                        source: 'hamster_icon.png'
+                        angle_start: 0
+                        angle_end: 360
+                
+            TwoLineIconListItem:
+                text: "Hamster"
+                secondary_text: "Fullname"
+
+                IconLeftWidget:
+                    icon: "account"
+            
+            TwoLineIconListItem:
+                text: "@hamster"
+                secondary_text: "Username can not be change"
+
+                IconLeftWidget:
+                    icon: "account-circle"
+
+            TwoLineIconListItem:
+                text: "hamster@gmail.com"
+                secondary_text: "Email"
+
+                IconLeftWidget:
+                    icon: "email"
+            
+            TwoLineIconListItem:
+                text: "Hamster is Chatting App"
+                secondary_text: "Bio"
+
+                IconLeftWidget:
+                    icon: "information"
+            
+            BoxLayout:
+
+                orientation:'vertical'
+            

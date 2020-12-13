@@ -31,6 +31,7 @@ class HamsterApp(MDApp):
         Add all chats in chat tab
         """
         # for dummy chats [------
+        self.change_screen("profile")
         for i in range(10):
             twolineW= TwoLineAvatarListItem(text=f"Hamster",
                 secondary_text="Hamster is Chatting app")
@@ -60,7 +61,9 @@ class HamsterApp(MDApp):
         screen_manager.add_widget(Builder.load_file("ui//signup.kv"))
         screen_manager.add_widget(Builder.load_file("ui//forgot.kv"))
         screen_manager.add_widget(Builder.load_file("ui//verification.kv"))
-        screen_manager.add_widget(Builder.load_file("ui//home.kv"))        
+        screen_manager.add_widget(Builder.load_file("ui//home.kv")) 
+        screen_manager.add_widget(Builder.load_file("ui//profile.kv"))        
+        self.change_screen("profile")
         return screen_manager
 
 if __name__ == "__main__":
