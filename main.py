@@ -24,6 +24,7 @@ class HamsterApp(MDApp):
             # to resize when switch to home screen 
             screen_manager.get_screen(name).ids.android_tabs.on_resize()
         
+        
 
     
     def all_chats(self):
@@ -31,7 +32,7 @@ class HamsterApp(MDApp):
         Add all chats in chat tab
         """
         # for dummy chats [------
-        self.change_screen("profile")
+        # self.change_screen("profile")
         for i in range(10):
             twolineW= TwoLineAvatarListItem(text=f"Hamster",
                 secondary_text="Hamster is Chatting app")
@@ -63,7 +64,9 @@ class HamsterApp(MDApp):
         screen_manager.add_widget(Builder.load_file("ui//verification.kv"))
         screen_manager.add_widget(Builder.load_file("ui//home.kv")) 
         screen_manager.add_widget(Builder.load_file("ui//profile.kv"))
+        
         return screen_manager
-
+    # def on_start(self):
+    #     self.change_screen("login")
 if __name__ == "__main__":
     HamsterApp().run()
