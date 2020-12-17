@@ -5,12 +5,17 @@ if platform != 'android':
     Config.set("graphics","width",360)
     Config.set("graphics","height",740)
 
+from kivy.core.window import Window
+Window.keyboard_anim_args = {"d":.2,"t":"in_out_expo"}
+Window.softinput_mode = "below_target"
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.floatlayout import FloatLayout
 from kivymd.uix.tab import MDTabsBase
 from kivymd.uix.list import TwoLineAvatarListItem,ImageLeftWidget
+
 class HamsterApp(MDApp):
 
     def change_screen(self,name):
@@ -26,6 +31,8 @@ class HamsterApp(MDApp):
         
         
 
+    def chat_room(self,touch,a):
+        self.change_screen("chat_room")
     
     def all_chats(self):
         """
@@ -33,13 +40,13 @@ class HamsterApp(MDApp):
         """
         # for dummy chats [------
         # self.change_screen("profile")
-        for i in range(10):
-            twolineW= TwoLineAvatarListItem(text=f"Hamster",
-                secondary_text="Hamster is Chatting app")
+        twolineW= TwoLineAvatarListItem(text=f"Hamster",
+            secondary_text="Hamster is Chatting app",
+            on_touch_up=self.chat_room)
 
-            twolineW.add_widget(ImageLeftWidget(source="hamster_icon.png"))
-            
-            screen_manager.get_screen("home").ids.chat_tab.add_widget(twolineW)
+        twolineW.add_widget(ImageLeftWidget(source="hamster_icon.png"))
+        
+        screen_manager.get_screen("home").ids.chat_tab.add_widget(twolineW)
         #  ----- ] end dummy chats
 
     def search_account(self,search_field):
@@ -53,7 +60,9 @@ class HamsterApp(MDApp):
         screen_manager.get_screen("home").ids.search_items.add_widget(twolineW)
         # #  ----- ] end dummy search
 
-
+    
+    def change_profile_img(self):
+        print("hello")
     def build(self):
         self.theme_cls.theme_style="Light"
         global screen_manager
@@ -64,9 +73,10 @@ class HamsterApp(MDApp):
         screen_manager.add_widget(Builder.load_file("ui//verification.kv"))
         screen_manager.add_widget(Builder.load_file("ui//home.kv")) 
         screen_manager.add_widget(Builder.load_file("ui//profile.kv"))
+        screen_manager.add_widget(Builder.load_file("ui//chat_room.kv"))
         
         return screen_manager
-    # def on_start(self):
-    #     self.change_screen("login")
+    def on_start(self):
+        self.all_chats()
 if __name__ == "__main__":
     HamsterApp().run()

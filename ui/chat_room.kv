@@ -1,0 +1,54 @@
+MDScreen:
+    name: "chat_room"
+    MDBoxLayout:
+        # md_bg_color: app.theme_cls.primary_color
+        orientation:'vertical'
+
+        MDToolbar:
+            id:profile_bar
+            title: "@username"
+            size_hint: 1,0.08
+            left_action_items: [ ["arrow-left", lambda x:app.change_screen("home")]] 
+            elevation: 5
+        MDBoxLayout:
+            # md_bg_color: app.theme_cls.primary_color
+            orientation:'vertical'
+            
+            MDBoxLayout:
+                id: root_chatroom
+                # md_bg_color: app.theme_cls.primary_color
+                orientation:'vertical'
+            
+                ScrollView:
+                    MDList:
+                        # MDCard:
+                        #     orientation: "vertical"
+                        #     padding: "8dp"
+                        #     size_hint: None, None
+                        #     size: "250dp", "180dp"
+                        #     pos_hint: {"center_x": .5, "center_y": .5}
+
+                        #     MDLabel:
+                        #         id:msg_box
+                        #         text: "Body"
+                        
+                        
+                MDCard:
+                    size_hint: None,None
+                    size: root_chatroom.size[0], "50dp"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    spacing: dp(2)
+                    padding: dp(2)
+                    
+                    MDTextField:
+                        id:text_
+                        multiline: True
+                        max_text_length: 250
+                        
+                        
+                    MDIconButton:
+                        icon:"send"
+                        on_release: msg_box.text = text_.text
+
+                
+                

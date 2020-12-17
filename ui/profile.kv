@@ -5,29 +5,28 @@ MDScreen:
         # md_bg_color: app.theme_cls.primary_color
         orientation:'vertical'
 
-
         MDToolbar:
             id:profile_bar
             title: "Profile"
             size_hint: 1,0.08
+            # pos_hint: {"center_y":.965}
             left_action_items: [ ["arrow-left", lambda x:app.change_screen("home")]] 
-        
+            elevation: 5
+
         MDBoxLayout:
             orientation:'vertical'
-
-            spacing: "50dp"
+            spacing: "100dp"
+            
             MDCard:                
                 orientation:'vertical'
                 size_hint: None, None
                 size: "250dp", "250dp"
                 pos_hint: {"center_x": .5, "center_y": .5}
 
-                Image:
-                    id: profile_img
-                    source:"profile.jpg"
-                    keep_ratio: False
-                    allow_stretch: True
-                    size: self.texture_size[0]+600,self.texture_size[0]+600
+                Button:
+                    background_normal: "profile.jpg"
+                    background_down: "profile.jpg"
+                    on_release: app.change_profile_img()
             
                     
             MDList:
@@ -53,4 +52,4 @@ MDScreen:
                     IconLeftWidget:
                         icon: "email"
         
-            
+        
