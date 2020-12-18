@@ -21,6 +21,8 @@ MDScreen:
             
                 ScrollView:
                     MDList:
+                        id:all_msgs
+                        
                         # MDCard:
                         #     orientation: "vertical"
                         #     padding: "8dp"
@@ -34,21 +36,24 @@ MDScreen:
                         
                         
                 MDCard:
+                    id:send_card
                     size_hint: None,None
-                    size: root_chatroom.size[0], "50dp"
+                    size: root_chatroom.size[0], msg_textbox.size[1]
                     pos_hint: {"center_x": .5, "center_y": .5}
                     spacing: dp(2)
-                    padding: dp(2)
-                    
-                    MDTextField:
-                        id:text_
-                        multiline: True
-                        max_text_length: 250
+                    padding: dp(5)
+
+                    ScrollView:        
+                        MDTextField:
+                            id:msg_textbox
+                            multiline: True
+                            max_text_length: 250
+                            on_text: app.chat_textbox()
                         
                         
                     MDIconButton:
                         icon:"send"
-                        on_release: msg_box.text = text_.text
+                        on_release: app.send_msg(msg_textbox.text)
 
                 
                 

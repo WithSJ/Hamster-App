@@ -15,6 +15,9 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.floatlayout import FloatLayout
 from kivymd.uix.tab import MDTabsBase
 from kivymd.uix.list import TwoLineAvatarListItem,ImageLeftWidget
+from kivymd.uix.label import MDLabel
+from kivymd.uix.card import MDCard
+from kivymd.uix.button import MDRoundFlatButton
 
 class HamsterApp(MDApp):
 
@@ -30,8 +33,31 @@ class HamsterApp(MDApp):
             screen_manager.get_screen(name).ids.android_tabs.on_resize()
         
         
+    def chat_textbox(self):
+        """
+            Incress size of sending textbox accourting to text
+        """
+        fixed_Y_size = screen_manager.get_screen("chat_room").ids.root_chatroom.size[1]/2
+        msg_textbox=screen_manager.get_screen("chat_room").ids.msg_textbox.size
+        if msg_textbox[1] <= fixed_Y_size:
+            screen_manager.get_screen("chat_room").ids.send_card.size[1]=msg_textbox[1]
+            print(msg_textbox)
+        else:
+            screen_manager.get_screen("chat_room").ids.send_card.size[1]=fixed_Y_size
+
+    def send_msg(self,msg_data):
+        """
+        Use this function when you send msg 
+        """
+        # text_msg = MDLabel(text=msg_data,halign="right")
+        # new_msg = text_msg
+        # screen_manager.get_screen("chat_room").ids.all_msgs.add_widget(new_msg)
+        print(msg_data)
+        screen_manager.get_screen("chat_room").ids.msg_textbox.text=""
+
 
     def chat_room(self,touch,a):
+        """Switch to Chatroom """
         self.change_screen("chat_room")
     
     def all_chats(self):
