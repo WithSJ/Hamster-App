@@ -24,6 +24,7 @@ MDScreen:
                 pos_hint: {"center_x": .5, "center_y": .5}
 
                 Button:
+                    id:profile_image
                     background_normal: "profile.jpg"
                     background_down: "profile.jpg"
                     on_release: app.change_profile_img()
@@ -32,6 +33,7 @@ MDScreen:
             MDList:
 
                 TwoLineIconListItem:
+                    id:profile_name
                     text: "Hamster"
                     secondary_text: "Fullname"
 
@@ -39,13 +41,14 @@ MDScreen:
                         icon: "account"
                 
                 TwoLineIconListItem:
-                    text: "hamster"
+                    id:profile_username
                     secondary_text: "Username"
 
                     IconLeftWidget:
                         icon: "at"
                 
                 TwoLineIconListItem:
+                    id:profile_email
                     text: "hamster@gmail.com"
                     secondary_text: "Email"
 
