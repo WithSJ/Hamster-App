@@ -21,8 +21,8 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.floatlayout import FloatLayout
 from kivymd.uix.tab import MDTabsBase
 from kivymd.uix.list import TwoLineAvatarListItem,ImageLeftWidget
-# from kivymd.uix.label import MDLabel
-# from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
+from kivymd.uix.card import MDCard
 # from kivymd.uix.button import MDRoundFlatButton
 
 #--[End UI Imports]
@@ -64,11 +64,39 @@ class HamsterApp(MDApp):
             When send button use to send msg this function call
             and clear MSGbox 
         """
-        # text_msg = MDLabel(text=msg_data,halign="right")
-        # new_msg = text_msg
-        # screen_manager.get_screen("chat_room").ids.all_msgs.add_widget(new_msg)
+        
+        text_msg = MDLabel(text=msg_data,halign="left")
+        
+        sizeX = screen_manager.get_screen("chat_room").ids.msg_textbox.size[0]    
+        
+        sizeY = screen_manager.get_screen("chat_room").ids.msg_textbox.size[1]
+        # ->> sizeY is equal to msg_textbox sizeY because text_msg sizeY not work 
+        # that's why i use msg_textbox is called 'Jugaad'
+        
+        
+        msg_card= MDCard(
+            size_hint=[None,None],
+            size=[sizeX,sizeY],
+            padding=20,
+            elevation=9,
+            ripple_behavior= True,
+            radius= [25,25,25,0 ]
+
+        )
+        msg_card.add_widget(text_msg)
+        # new_msg = msg_card
+        screen_manager.get_screen("chat_room").ids.all_msgs.add_widget(msg_card)
         print(msg_data)
+        screen_manager.get_screen("chat_room").ids.msg_scroll_view.scroll_to(msg_card)
         screen_manager.get_screen("chat_room").ids.msg_textbox.text=""
+        
+        # return msg_card
+        # msg_card=None
+        # for i in range(20):
+        #     msg_card = self.send_msg(str(i))
+        
+        
+
 
 
     def chat_room(self,touch,a):
@@ -77,6 +105,8 @@ class HamsterApp(MDApp):
         
         name = touch.text
         screen_manager.get_screen("chat_room").ids.profile_bar.title = name
+
+
         self.change_screen("chat_room")
     
     def all_chats(self):
