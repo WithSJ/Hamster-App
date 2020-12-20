@@ -11,7 +11,7 @@ if platform != 'android':
 automatic go to top of keyboard so user can see when he type msg"""
 from kivy.core.window import Window
 Window.keyboard_anim_args = {"d":.2,"t":"linear"}
-Window.softinput_mode = "pan"
+Window.softinput_mode = "below_target"
 #--[End Msg Box code ]
 
 """All imports for UI here Kivy,KivyMD or etc that help in UI"""
