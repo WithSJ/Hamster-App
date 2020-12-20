@@ -10,8 +10,8 @@ if platform != 'android':
 """code for android keyboard. when in android keyboard show textbox 
 automatic go to top of keyboard so user can see when he type msg"""
 from kivy.core.window import Window
-Window.keyboard_anim_args = {"d":.2,"t":"in_out_expo"}
-Window.softinput_mode = "below_target"
+Window.keyboard_anim_args = {"d":.2,"t":"linear"}
+Window.softinput_mode = "pan"
 #--[End Msg Box code ]
 
 """All imports for UI here Kivy,KivyMD or etc that help in UI"""
@@ -51,7 +51,7 @@ class HamsterApp(MDApp):
             MDCard size change when MSGbox use multilines.
             MDCard y axis size incress when MSGbox y axis size incress
         """
-        fixed_Y_size = screen_manager.get_screen("chat_room").ids.root_chatroom.size[1]/2
+        fixed_Y_size = screen_manager.get_screen("chat_room").ids.root_chatroom.size[1]/3
         msg_textbox=screen_manager.get_screen("chat_room").ids.msg_textbox.size
         if msg_textbox[1] <= fixed_Y_size:
             screen_manager.get_screen("chat_room").ids.send_card.size[1]=msg_textbox[1]
@@ -68,7 +68,7 @@ class HamsterApp(MDApp):
         text_msg = MDLabel(text=msg_data,halign="left")
         
         sizeX = screen_manager.get_screen("chat_room").ids.msg_textbox.size[0]    
-        
+
         sizeY = screen_manager.get_screen("chat_room").ids.msg_textbox.size[1]
         # ->> sizeY is equal to msg_textbox sizeY because text_msg sizeY not work 
         # that's why i use msg_textbox is called 'Jugaad'
