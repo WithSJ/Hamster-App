@@ -22,7 +22,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivymd.uix.tab import MDTabsBase
 from kivymd.uix.list import TwoLineAvatarListItem,ImageLeftWidget
 from kivymd.uix.label import MDLabel
-from kivymd.uix.card import MDCard
+from kivymd.uix.card import MDCard,MDSeparator
 # from kivymd.uix.button import MDRoundFlatButton
 
 #--[End UI Imports]
@@ -69,20 +69,32 @@ class HamsterApp(MDApp):
         
         sizeX = screen_manager.get_screen("chat_room").ids.msg_textbox.size[0]    
 
-        sizeY = screen_manager.get_screen("chat_room").ids.msg_textbox.size[1]
+        sizeY = screen_manager.get_screen("chat_room").ids.msg_textbox.size[1]+60
         # ->> sizeY is equal to msg_textbox sizeY because text_msg sizeY not work 
         # that's why i use msg_textbox is called 'Jugaad'
         
         
         msg_card= MDCard(
+            orientation= "vertical",
             size_hint=[None,None],
             size=[sizeX,sizeY],
+            spacing=8,
             padding=20,
             elevation=9,
             ripple_behavior= True,
             radius= [25,25,25,0 ]
 
         )
+        msg_card.add_widget(MDLabel(
+            text= f"Hamster {' '*8} |1:00 PM|",
+            theme_text_color= "Secondary",
+            size_hint_y= None,
+            height= 50
+        ))
+        msg_card.add_widget(MDSeparator(
+            height= "1dp"
+        ))
+
         msg_card.add_widget(text_msg)
         # new_msg = msg_card
         screen_manager.get_screen("chat_room").ids.all_msgs.add_widget(msg_card)
