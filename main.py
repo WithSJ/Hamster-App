@@ -23,8 +23,12 @@ from kivymd.uix.tab import MDTabsBase
 from kivymd.uix.list import TwoLineAvatarListItem,ImageLeftWidget
 from kivymd.uix.label import MDLabel
 from kivymd.uix.card import MDCard,MDSeparator
-# from kivymd.uix.button import MDRoundFlatButton
+from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.textfield import MDTextField
 
+from ui.ui_class import OneLineTextDialog
 #--[End UI Imports]
 
 
@@ -96,17 +100,11 @@ class HamsterApp(MDApp):
         ))
 
         msg_card.add_widget(text_msg)
-        # new_msg = msg_card
         screen_manager.get_screen("chat_room").ids.all_msgs.add_widget(msg_card)
         print(msg_data)
         screen_manager.get_screen("chat_room").ids.msg_scroll_view.scroll_to(msg_card)
         screen_manager.get_screen("chat_room").ids.msg_textbox.text=""
-        
-        # return msg_card
-        # msg_card=None
-        # for i in range(20):
-        #     msg_card = self.send_msg(str(i))
-        
+
         
 
 
@@ -160,6 +158,40 @@ class HamsterApp(MDApp):
         if it's user own profile than show options of change.
         """
         print("hello")
+    
+    def change_text_data(self,widget):
+        """Change text data using Dialog box.
+        [widget] change this widget text"""
+        dialogObj =None
+        Dialog=OneLineTextDialog()
+        def cancel_btn(btn):
+            # use function when CANCEL btn click
+            dialogObj.dismiss(force=True)
+        def ok_btn(btn):
+            # use function when OK btn click
+            widget.text = Dialog.ids.dialog_text.text
+            cancel_btn(btn)
+            
+            
+        if not dialogObj:
+            dialogObj=MDDialog(
+                auto_dismiss=False,
+                title= widget.secondary_text,
+                type="custom",
+                content_cls=Dialog,
+                buttons=[
+                    MDFlatButton(
+                        text="CANCEL", text_color=self.theme_cls.primary_color,
+                        on_release=cancel_btn,
+                    ),
+                    MDFlatButton(
+                        text="OK", text_color=self.theme_cls.primary_color,
+                        on_release=ok_btn,
+                    ),
+                ],
+            )
+        dialogObj.open()
+
 
     def build(self):
         """
@@ -177,6 +209,7 @@ class HamsterApp(MDApp):
         screen_manager.add_widget(Builder.load_file("ui//home.kv")) 
         screen_manager.add_widget(Builder.load_file("ui//profile.kv"))
         screen_manager.add_widget(Builder.load_file("ui//chat_room.kv"))
+        screen_manager.add_widget(Builder.load_file("ui//ui_class.kv"))
         
         return screen_manager
     

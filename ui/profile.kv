@@ -32,27 +32,37 @@ MDScreen:
                     
             MDList:
 
-                TwoLineIconListItem:
+                TwoLineAvatarIconListItem:
                     id:profile_name
                     text: "Hamster"
                     secondary_text: "Fullname"
 
                     IconLeftWidget:
                         icon: "account"
-                
-                TwoLineIconListItem:
+                    
+                    IconRightWidget:
+                        icon: "pen"
+                        on_release: app.change_text_data(profile_name)
+                    
+                TwoLineAvatarIconListItem:
                     id:profile_username
+                    text: "@hamster"
                     secondary_text: "Username"
-
                     IconLeftWidget:
                         icon: "at"
+                    
+                    IconRightWidget:
+                        icon: "pen-lock"
+                        # on_release: app.change_text_data(profile_username)
                 
-                TwoLineIconListItem:
+                TwoLineAvatarIconListItem:
                     id:profile_email
                     text: "hamster@gmail.com"
                     secondary_text: "Email"
 
                     IconLeftWidget:
                         icon: "email"
-        
-        
+                    
+                    IconRightWidget:
+                        icon: "pen"
+                        on_release: app.change_text_data(profile_email)
