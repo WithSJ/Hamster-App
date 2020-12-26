@@ -1,4 +1,4 @@
-from kivy.uix.boxlayout import BoxLayout
+from main_imports import BoxLayout
 class OneLineTextDialog(BoxLayout):
     
     def input_text(self):

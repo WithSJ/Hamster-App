@@ -1,3 +1,4 @@
+#--[Start platform specific code]
 """This code to detect it's Android or not 
 if it's not android than app window size change in android phone size"""
 from kivy.utils import platform
@@ -7,30 +8,15 @@ if platform != 'android':
     Config.set("graphics","height",740)
 #--[End platform specific code]
 
+#--[Start Soft_Keyboard code ]
 """code for android keyboard. when in android keyboard show textbox 
 automatic go to top of keyboard so user can see when he type msg"""
 from kivy.core.window import Window
 Window.keyboard_anim_args = {"d":.2,"t":"linear"}
 Window.softinput_mode = "below_target"
-#--[End Msg Box code ]
+#--[End Soft_Keyboard code ]
 
-"""All imports for UI here Kivy,KivyMD or etc that help in UI"""
-from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager
-from kivy.uix.floatlayout import FloatLayout
-from kivymd.uix.tab import MDTabsBase
-from kivymd.uix.list import TwoLineAvatarListItem,ImageLeftWidget
-from kivymd.uix.label import MDLabel
-from kivymd.uix.card import MDCard,MDSeparator
-from kivy.uix.boxlayout import BoxLayout
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import MDFlatButton
-from kivymd.uix.textfield import MDTextField
-
-from ui.ui_class import OneLineTextDialog
-#--[End UI Imports]
-
+from main_imports import *
 
 class HamsterApp(MDApp):
     """
@@ -104,10 +90,6 @@ class HamsterApp(MDApp):
         print(msg_data)
         screen_manager.get_screen("chat_room").ids.msg_scroll_view.scroll_to(msg_card)
         screen_manager.get_screen("chat_room").ids.msg_textbox.text=""
-
-        
-
-
 
     def chat_room(self,touch,a):
         """Switch to Chatroom. but username and chatroom username 
