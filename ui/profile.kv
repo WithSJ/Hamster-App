@@ -1,4 +1,6 @@
 
+#:import Snackbar kivymd.uix.snackbar.Snackbar
+
 MDScreen:
     name: "profile"
     MDBoxLayout:
@@ -53,6 +55,7 @@ MDScreen:
                     
                     IconRightWidget:
                         icon: "pen-lock"
+                        on_release: Snackbar(text="You can't change username.").open()
                         # on_release: app.change_text_data(profile_username)
                 
                 TwoLineAvatarIconListItem:

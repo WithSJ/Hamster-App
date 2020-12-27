@@ -139,7 +139,21 @@ class HamsterApp(MDApp):
         method call when image click on profile_view page.
         if it's user own profile than show options of change.
         """
-        print("hello")
+        bottom_sheet_menu = MDGridBottomSheet(
+            animation=True,
+        )
+        data = {
+            "Upload": "cloud-upload",
+            "Camera": "camera",
+        }
+        for item in data.items():
+            bottom_sheet_menu.add_item(
+                item[0],
+                lambda x, y=item[0]: print("hello",x,y),
+                icon_src=item[1],
+            )
+        bottom_sheet_menu.open()
+        
     
     def change_text_data(self,widget):
         """Change text data using Dialog box.
