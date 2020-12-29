@@ -24,11 +24,44 @@ class HamsterApp(MDApp):
     in kivy (.kv) file when use app.method_name app is start from here
     """
 
+    def __init__(self, **kwargs):
+        super(HamsterApp, self).__init__(**kwargs)
+        Window.bind(on_keyboard=self._key_handler)
+        
+        self.screen_list = list() #this list have all screen that user switch
+
+    def _key_handler(self, instance, key, *args):
+        
+        if key is 27:
+            #in Desktop this key is Esc and in Phone it's Back btn
+            self.previous_screen()
+            return True
+    
+    def previous_screen(self):
+        """
+        Switch to previous screen 
+        """
+        last_screen=self.screen_list.pop()
+        if last_screen == "home" or last_screen == "login":
+            exit()
+        print(self.screen_list)
+        screen_manager.transition.direction = "left"
+        screen_manager.current = self.screen_list[len(self.screen_list)-1]
+        
+        
+
     def change_screen(self,name):
         """
-        Switch Screen using screen name
+        Switch Screen using screen name and 
         """
         screen_manager.current = name 
+        if name not in self.screen_list:
+            self.screen_list.append(screen_manager.current)
+        else:
+            self.screen_list.remove(name)
+            self.screen_list.append(screen_manager.current)
+        
+        print(self.screen_list)
 
         if name == "home":            
             # MDBottomNavigation not resize there tabs when app stat in android 
@@ -171,7 +204,7 @@ class HamsterApp(MDApp):
             
         if not dialogObj:
             dialogObj=MDDialog(
-                auto_dismiss=False,
+                auto_dismiss=True,
                 title= widget.secondary_text,
                 type="custom",
                 content_cls=Dialog,
@@ -206,7 +239,7 @@ class HamsterApp(MDApp):
         screen_manager.add_widget(Builder.load_file("ui//profile.kv"))
         screen_manager.add_widget(Builder.load_file("ui//chat_room.kv"))
         screen_manager.add_widget(Builder.load_file("ui//ui_class.kv"))
-        
+        self.change_screen("login")
         return screen_manager
     
     def on_start(self):
