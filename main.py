@@ -28,18 +28,18 @@ class HamsterApp(MDApp):
         super(HamsterApp, self).__init__(**kwargs)
         Window.bind(on_keyboard=self._key_handler)
         
-        self.screen_list = list() #this list have all screen that user switch
+        self.screen_list = list() #this list have all screen that user switched
 
     def _key_handler(self, instance, key, *args):
         
         if key is 27:
-            #in Desktop this key is Esc and in Phone it's Back btn
+            #in Desktop this key 27 is Esc and in Phone it's Back btn
             self.previous_screen()
             return True
     
     def previous_screen(self):
         """
-        Switch to previous screen 
+        Switch to previous screen last screen in screen_list
         """
         last_screen=self.screen_list.pop()
         if last_screen == "home" or last_screen == "login":
