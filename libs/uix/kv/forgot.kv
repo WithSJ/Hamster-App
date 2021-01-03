@@ -1,7 +1,7 @@
 #:import APP_NAME config.APP_NAME
 #:import COMPANY_NAME config.COMPANY_NAME
-MDScreen:
-    name: "verification"
+<Forgot_Screen>:
+    name: "forgot"
     MDLabel:
         text: APP_NAME
         halign: "center"
@@ -9,40 +9,35 @@ MDScreen:
         font_style: "H3"
     
     MDLabel:
-        text: "Account verification"
+        text: "Forgot Password"
         halign: "center"
         pos_hint: {"center_y":.73}
         font_style: "Subtitle2"
-    
-    MDLabel:
-        text: "We've sent a verification code to your email."
-        halign: "center"
-        pos_hint: {"center_y":.67}
-        font_style: "Body2"
         
     MDTextField:
-        hint_text: "Enter your verification Code"
+        hint_text: "Username or Email"
         pos_hint: {"center_x": 0.5, "center_y": 0.6}
         size_hint: .75,0.08
-        max_text_length: 6
         # mode: "rectangle"
 
     MDRaisedButton:
-        text: "Submit"
-        pos_hint: {"center_x": 0.5, "center_y":0.52}
+        text: "Forgot Password"
+        pos_hint: {"center_x": 0.5, "center_y":0.5}
         size_hint: .7,0.05
-    
-    MDTextButton:
-        text: "Resend code"
-        pos_hint: {"center_x": 0.5, "center_y":0.45}
         on_release: app.change_screen("verification")
 
-    MDLabel:
-        text: "Never share your verification code to anyone."
-        halign: "center"
-        pos_hint: {"center_y":.4}
-        font_style: "Caption"
-
+    MDTextButton:
+        text: f"[color=#000000]Don't have an account?[/color] Sign up"
+        markup: True
+        pos_hint: {"center_x":0.5, "center_y":0.4}
+        on_release: app.change_screen("signup")
+    
+    MDTextButton:
+        text: f"[b][color=#000000]Back To[/color] Login[/b]"
+        markup: True
+        pos_hint: {"center_x":0.5, "center_y":0.33}
+        on_release: app.change_screen("login")
+    
     MDLabel:
         text: f"[font=Icons] {md_icons['copyright']}[/font]  [font=Roboto]{COMPANY_NAME} 2020[/font]"
         markup: True

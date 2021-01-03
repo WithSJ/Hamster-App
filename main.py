@@ -18,6 +18,15 @@ Window.softinput_mode = "below_target"
 
 from main_imports import *
 
+from libs.uix.baseclass.root import Root
+from libs.uix.baseclass.login import Login_Screen
+from libs.uix.baseclass.signup import Signup_Screen
+from libs.uix.baseclass.forgot import Forgot_Screen
+from libs.uix.baseclass.verification import Verification_Screen
+from libs.uix.baseclass.home import Home_Screen
+from libs.uix.baseclass.chat_room import Chat_Room_Screen
+from libs.uix.baseclass.profile import Profile_Screen
+
 class HamsterApp(MDApp):
     """
     Hamster App start from here this class is root of app.
@@ -45,8 +54,8 @@ class HamsterApp(MDApp):
         if last_screen == "home" or last_screen == "login":
             exit()
         print(self.screen_list)
-        screen_manager.transition.direction = "left"
-        screen_manager.current = self.screen_list[len(self.screen_list)-1]
+        self.screen_manager.transition.direction = "left"
+        self.screen_manager.current = self.screen_list[len(self.screen_list)-1]
         
         
 
@@ -54,19 +63,19 @@ class HamsterApp(MDApp):
         """
         Switch Screen using screen name and 
         """
-        screen_manager.current = name 
+        self.screen_manager.current = name 
         if name not in self.screen_list:
-            self.screen_list.append(screen_manager.current)
+            self.screen_list.append(self.screen_manager.current)
         else:
             self.screen_list.remove(name)
-            self.screen_list.append(screen_manager.current)
+            self.screen_list.append(self.screen_manager.current)
         
         print(self.screen_list)
 
         if name == "home":            
             # MDBottomNavigation not resize there tabs when app stat in android 
             # to resize when switch to home screen 
-            screen_manager.get_screen(name).ids.android_tabs.on_resize()
+            self.screen_manager.get_screen(name).ids.android_tabs.on_resize()
         
         
     def chat_textbox(self):
@@ -74,13 +83,13 @@ class HamsterApp(MDApp):
             MDCard size change when MSGbox use multilines.
             MDCard y axis size incress when MSGbox y axis size incress
         """
-        fixed_Y_size = screen_manager.get_screen("chat_room").ids.root_chatroom.size[1]/3
-        msg_textbox=screen_manager.get_screen("chat_room").ids.msg_textbox.size
+        fixed_Y_size = self.screen_manager.get_screen("chat_room").ids.root_chatroom.size[1]/3
+        msg_textbox=self.screen_manager.get_screen("chat_room").ids.msg_textbox.size
         if msg_textbox[1] <= fixed_Y_size:
-            screen_manager.get_screen("chat_room").ids.send_card.size[1]=msg_textbox[1]
+            self.screen_manager.get_screen("chat_room").ids.send_card.size[1]=msg_textbox[1]
             print(msg_textbox)
         else:
-            screen_manager.get_screen("chat_room").ids.send_card.size[1]=fixed_Y_size
+            self.screen_manager.get_screen("chat_room").ids.send_card.size[1]=fixed_Y_size
 
     def send_msg(self,msg_data):
         """
@@ -90,9 +99,9 @@ class HamsterApp(MDApp):
         
         text_msg = MDLabel(text=msg_data,halign="left")
         
-        sizeX = screen_manager.get_screen("chat_room").ids.msg_textbox.size[0]    
+        sizeX = self.screen_manager.get_screen("chat_room").ids.msg_textbox.size[0]    
 
-        sizeY = screen_manager.get_screen("chat_room").ids.msg_textbox.size[1]+60
+        sizeY = self.screen_manager.get_screen("chat_room").ids.msg_textbox.size[1]+60
         # ->> sizeY is equal to msg_textbox sizeY because text_msg sizeY not work 
         # that's why i use msg_textbox is called 'Jugaad'
         
@@ -119,17 +128,17 @@ class HamsterApp(MDApp):
         ))
 
         msg_card.add_widget(text_msg)
-        screen_manager.get_screen("chat_room").ids.all_msgs.add_widget(msg_card)
+        self.screen_manager.get_screen("chat_room").ids.all_msgs.add_widget(msg_card)
         print(msg_data)
-        screen_manager.get_screen("chat_room").ids.msg_scroll_view.scroll_to(msg_card)
-        screen_manager.get_screen("chat_room").ids.msg_textbox.text=""
+        self.screen_manager.get_screen("chat_room").ids.msg_scroll_view.scroll_to(msg_card)
+        self.screen_manager.get_screen("chat_room").ids.msg_textbox.text=""
 
     def chat_room(self,touch,a):
         """Switch to Chatroom. but username and chatroom username 
         change according to which one you touch in chat list"""
         
         name = touch.text
-        screen_manager.get_screen("chat_room").ids.profile_bar.title = name
+        self.screen_manager.get_screen("chat_room").ids.profile_bar.title = name
 
 
         self.change_screen("chat_room")
@@ -147,7 +156,7 @@ class HamsterApp(MDApp):
 
         twolineW.add_widget(ImageLeftWidget(source="hamster_icon.png"))
         
-        screen_manager.get_screen("home").ids.chat_tab.add_widget(twolineW)
+        self.screen_manager.get_screen("home").ids.chat_tab.add_widget(twolineW)
         #  ----- ] end dummy chats
 
     def search_account(self,search_field):
@@ -163,7 +172,7 @@ class HamsterApp(MDApp):
 
         twolineW.add_widget(ImageLeftWidget(source="hamster_icon.png"))
         
-        screen_manager.get_screen("home").ids.search_items.add_widget(twolineW)
+        self.screen_manager.get_screen("home").ids.search_items.add_widget(twolineW)
         # #  ----- ] end dummy search
 
     
@@ -229,18 +238,29 @@ class HamsterApp(MDApp):
         write here.
         """
         self.theme_cls.theme_style="Light"
-        global screen_manager
-        screen_manager = ScreenManager()
-        screen_manager.add_widget(Builder.load_file("ui//login.kv"))
-        screen_manager.add_widget(Builder.load_file("ui//signup.kv"))
-        screen_manager.add_widget(Builder.load_file("ui//forgot.kv"))
-        screen_manager.add_widget(Builder.load_file("ui//verification.kv"))
-        screen_manager.add_widget(Builder.load_file("ui//home.kv")) 
-        screen_manager.add_widget(Builder.load_file("ui//profile.kv"))
-        screen_manager.add_widget(Builder.load_file("ui//chat_room.kv"))
-        screen_manager.add_widget(Builder.load_file("ui//ui_class.kv"))
-        self.change_screen("login")
-        return screen_manager
+        # global screen_manager
+        # screen_manager = ScreenManager()
+        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//login.kv"))
+        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//signup.kv"))
+        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//forgot.kv"))
+        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//verification.kv"))
+        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//home.kv")) 
+        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//profile.kv"))
+        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//chat_room.kv"))
+        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//ui_class.kv"))
+        # self.change_screen("login")
+        # return screen_manager
+
+        self.screen_manager = Root()
+        self.screen_manager.add_widget(Login_Screen())
+        self.screen_manager.add_widget(Signup_Screen())
+        self.screen_manager.add_widget(Forgot_Screen())
+        self.screen_manager.add_widget(Verification_Screen())
+        self.screen_manager.add_widget(Home_Screen())
+        self.screen_manager.add_widget(Chat_Room_Screen())
+        self.screen_manager.add_widget(Profile_Screen())
+
+        return self.screen_manager
     
     def on_start(self):
         """

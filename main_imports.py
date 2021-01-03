@@ -10,6 +10,7 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 
 from kivy.uix.screenmanager import ScreenManager
+from kivymd.uix.screen import MDScreen
 from kivy.uix.floatlayout import FloatLayout
 from kivymd.uix.tab import MDTabsBase
 from kivymd.uix.list import TwoLineAvatarListItem,ImageLeftWidget
@@ -19,8 +20,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.textfield import MDTextField
-from ui.ui_class import OneLineTextDialog
+from libs.uix.baseclass.ui_class import OneLineTextDialog
 from kivymd.uix.bottomsheet import MDGridBottomSheet
+
 #--[End UI Imports]
 
 
