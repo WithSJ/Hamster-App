@@ -1,2 +1,2 @@
 # Hamster-App
-This project for for android devlopment of Hamster App
+Chat Application for Android and Desktop (At present only Linux System)
