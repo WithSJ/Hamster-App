@@ -238,19 +238,7 @@ class HamsterApp(MDApp):
         write here.
         """
         self.theme_cls.theme_style="Light"
-        # global screen_manager
-        # screen_manager = ScreenManager()
-        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//login.kv"))
-        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//signup.kv"))
-        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//forgot.kv"))
-        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//verification.kv"))
-        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//home.kv")) 
-        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//profile.kv"))
-        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//chat_room.kv"))
-        # screen_manager.add_widget(Builder.load_file("libs//uix//kv//ui_class.kv"))
-        # self.change_screen("login")
-        # return screen_manager
-
+    
         self.screen_manager = Root()
         self.screen_manager.add_widget(Login_Screen())
         self.screen_manager.add_widget(Signup_Screen())
