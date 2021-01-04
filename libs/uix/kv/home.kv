@@ -9,7 +9,7 @@
         MDToolbar:
             title: APP_NAME
             size_hint: 1,.08
-            right_action_items: [ ["account", lambda x:app.change_screen("profile")]] 
+            right_action_items: [ ["account", lambda x:app.screen_manager.change_screen("profile")]] 
             elevation: 5
         
         MDBottomNavigation:
@@ -42,7 +42,7 @@
                         
                         MDIconButton:
                             icon: 'magnify'
-                            on_release: app.search_account(search_field.text)
+                            on_release: root.search_account(search_field.text)
 
                     ScrollView:
                         MDList:

@@ -24,19 +24,19 @@
         text: "Forgot Password"
         pos_hint: {"center_x": 0.5, "center_y":0.5}
         size_hint: .7,0.05
-        on_release: app.change_screen("verification")
+        on_release: app.screen_manager.change_screen("verification")
 
     MDTextButton:
         text: f"[color=#000000]Don't have an account?[/color] Sign up"
         markup: True
         pos_hint: {"center_x":0.5, "center_y":0.4}
-        on_release: app.change_screen("signup")
+        on_release: app.screen_manager.change_screen("signup")
     
     MDTextButton:
         text: f"[b][color=#000000]Back To[/color] Login[/b]"
         markup: True
         pos_hint: {"center_x":0.5, "center_y":0.33}
-        on_release: app.change_screen("login")
+        on_release: app.screen_manager.change_screen("login")
     
     MDLabel:
         text: f"[font=Icons] {md_icons['copyright']}[/font]  [font=Roboto]{COMPANY_NAME} 2020[/font]"

@@ -48,7 +48,7 @@
         text: f"[color=#000000]Have an account?[/color] Log in"
         markup: True
         pos_hint: {"center_x":0.5, "center_y":0.22}
-        on_release: app.change_screen("login")
+        on_release: app.screen_manager.change_screen("login")
     
     MDLabel:
         text: f"[font=Icons] {md_icons['copyright']}[/font]  [font=Roboto]{COMPANY_NAME} 2020[/font]"

@@ -16,7 +16,7 @@ Window.keyboard_anim_args = {"d":.2,"t":"linear"}
 Window.softinput_mode = "below_target"
 #--[End Soft_Keyboard code ]
 
-from main_imports import *
+from main_imports import MDApp,TwoLineAvatarListItem,ImageLeftWidget
 
 from libs.uix.baseclass.root import Root
 from libs.uix.baseclass.login import Login_Screen
@@ -35,104 +35,8 @@ class HamsterApp(MDApp):
 
     def __init__(self, **kwargs):
         super(HamsterApp, self).__init__(**kwargs)
-        Window.bind(on_keyboard=self._key_handler)
         
-        self.screen_list = list() #this list have all screen that user switched
-
-    def _key_handler(self, instance, key, *args):
-        
-        if key is 27:
-            #in Desktop this key 27 is Esc and in Phone it's Back btn
-            self.previous_screen()
-            return True
     
-    def previous_screen(self):
-        """
-        Switch to previous screen last screen in screen_list
-        """
-        last_screen=self.screen_list.pop()
-        if last_screen == "home" or last_screen == "login":
-            exit()
-        print(self.screen_list)
-        self.screen_manager.transition.direction = "left"
-        self.screen_manager.current = self.screen_list[len(self.screen_list)-1]
-        
-        
-
-    def change_screen(self,name):
-        """
-        Switch Screen using screen name and 
-        """
-        self.screen_manager.current = name 
-        if name not in self.screen_list:
-            self.screen_list.append(self.screen_manager.current)
-        else:
-            self.screen_list.remove(name)
-            self.screen_list.append(self.screen_manager.current)
-        
-        print(self.screen_list)
-
-        if name == "home":            
-            # MDBottomNavigation not resize there tabs when app stat in android 
-            # to resize when switch to home screen 
-            self.screen_manager.get_screen(name).ids.android_tabs.on_resize()
-        
-        
-    def chat_textbox(self):
-        """
-            MDCard size change when MSGbox use multilines.
-            MDCard y axis size incress when MSGbox y axis size incress
-        """
-        fixed_Y_size = self.screen_manager.get_screen("chat_room").ids.root_chatroom.size[1]/3
-        msg_textbox=self.screen_manager.get_screen("chat_room").ids.msg_textbox.size
-        if msg_textbox[1] <= fixed_Y_size:
-            self.screen_manager.get_screen("chat_room").ids.send_card.size[1]=msg_textbox[1]
-            print(msg_textbox)
-        else:
-            self.screen_manager.get_screen("chat_room").ids.send_card.size[1]=fixed_Y_size
-
-    def send_msg(self,msg_data):
-        """
-            When send button use to send msg this function call
-            and clear MSGbox 
-        """
-        
-        text_msg = MDLabel(text=msg_data,halign="left")
-        
-        sizeX = self.screen_manager.get_screen("chat_room").ids.msg_textbox.size[0]    
-
-        sizeY = self.screen_manager.get_screen("chat_room").ids.msg_textbox.size[1]+60
-        # ->> sizeY is equal to msg_textbox sizeY because text_msg sizeY not work 
-        # that's why i use msg_textbox is called 'Jugaad'
-        
-        
-        msg_card= MDCard(
-            orientation= "vertical",
-            size_hint=[None,None],
-            size=[sizeX,sizeY],
-            spacing=8,
-            padding=20,
-            elevation=9,
-            ripple_behavior= True,
-            radius= [25,25,25,0 ]
-
-        )
-        msg_card.add_widget(MDLabel(
-            text= f"Hamster {' '*8} |1:00 PM|",
-            theme_text_color= "Secondary",
-            size_hint_y= None,
-            height= 50
-        ))
-        msg_card.add_widget(MDSeparator(
-            height= "1dp"
-        ))
-
-        msg_card.add_widget(text_msg)
-        self.screen_manager.get_screen("chat_room").ids.all_msgs.add_widget(msg_card)
-        print(msg_data)
-        self.screen_manager.get_screen("chat_room").ids.msg_scroll_view.scroll_to(msg_card)
-        self.screen_manager.get_screen("chat_room").ids.msg_textbox.text=""
-
     def chat_room(self,touch,a):
         """Switch to Chatroom. but username and chatroom username 
         change according to which one you touch in chat list"""
@@ -141,7 +45,7 @@ class HamsterApp(MDApp):
         self.screen_manager.get_screen("chat_room").ids.profile_bar.title = name
 
 
-        self.change_screen("chat_room")
+        self.screen_manager.change_screen("chat_room")
     
     def all_chats(self):
         """
@@ -158,78 +62,8 @@ class HamsterApp(MDApp):
         
         self.screen_manager.get_screen("home").ids.chat_tab.add_widget(twolineW)
         #  ----- ] end dummy chats
-
-    def search_account(self,search_field):
-        """
-        this method use when search button pressed search_field
-        contain data in string that you want to search on hamster server
-        """
-
-        # for dummy search item [------
-        
-        twolineW= TwoLineAvatarListItem(text=f"{search_field}",
-            secondary_text=f"@{search_field}")
-
-        twolineW.add_widget(ImageLeftWidget(source="hamster_icon.png"))
-        
-        self.screen_manager.get_screen("home").ids.search_items.add_widget(twolineW)
-        # #  ----- ] end dummy search
-
     
-    def change_profile_img(self):
-        """
-        method call when image click on profile_view page.
-        if it's user own profile than show options of change.
-        """
-        bottom_sheet_menu = MDGridBottomSheet(
-            animation=True,
-        )
-        data = {
-            "Upload": "cloud-upload",
-            "Camera": "camera",
-        }
-        for item in data.items():
-            bottom_sheet_menu.add_item(
-                item[0],
-                lambda x, y=item[0]: print("hello",x,y),
-                icon_src=item[1],
-            )
-        bottom_sheet_menu.open()
-        
     
-    def change_text_data(self,widget):
-        """Change text data using Dialog box.
-        [widget] change this widget text"""
-        dialogObj =None
-        Dialog=OneLineTextDialog()
-        def cancel_btn(btn):
-            # use function when CANCEL btn click
-            dialogObj.dismiss(force=True)
-        def ok_btn(btn):
-            # use function when OK btn click
-            widget.text = Dialog.ids.dialog_text.text
-            cancel_btn(btn)
-            
-            
-        if not dialogObj:
-            dialogObj=MDDialog(
-                auto_dismiss=True,
-                title= widget.secondary_text,
-                type="custom",
-                content_cls=Dialog,
-                buttons=[
-                    MDFlatButton(
-                        text="CANCEL", text_color=self.theme_cls.primary_color,
-                        on_release=cancel_btn,
-                    ),
-                    MDFlatButton(
-                        text="OK", text_color=self.theme_cls.primary_color,
-                        on_release=ok_btn,
-                    ),
-                ],
-            )
-        dialogObj.open()
-
 
     def build(self):
         """
@@ -254,6 +88,7 @@ class HamsterApp(MDApp):
         """
         Anything we want to run when start application that code is here.
         """
+        self.screen_manager.change_screen("login")
         self.all_chats()
 
 if __name__ == "__main__":

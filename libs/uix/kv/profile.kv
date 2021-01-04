@@ -1,6 +1,3 @@
-
-#:import Snackbar kivymd.uix.snackbar.Snackbar
-
 <Profile_Screen>:
     name: "profile"
     MDBoxLayout:
@@ -12,7 +9,7 @@
             title: "Profile"
             size_hint: 1,0.08
             # pos_hint: {"center_y":.965}
-            left_action_items: [ ["arrow-left", lambda x:app.change_screen("home")]] 
+            left_action_items: [ ["arrow-left", lambda x:app.screen_manager.change_screen("home")]] 
             elevation: 5
 
         MDBoxLayout:
@@ -29,7 +26,7 @@
                     id:profile_image
                     background_normal: "profile.jpg"
                     background_down: "profile.jpg"
-                    on_release: app.change_profile_img()
+                    on_release: root.change_profile_img()
             
                     
             MDList:
@@ -44,7 +41,7 @@
                     
                     IconRightWidget:
                         icon: "pen"
-                        on_release: app.change_text_data(profile_name)
+                        on_release: root.change_profile_data(profile_name)
                     
                 TwoLineAvatarIconListItem:
                     id:profile_username
@@ -55,7 +52,6 @@
                     
                     IconRightWidget:
                         icon: "pen-lock"
-                        on_release: Snackbar(text="You can't change username.").open()
                         # on_release: app.change_text_data(profile_username)
                 
                 TwoLineAvatarIconListItem:
@@ -68,4 +64,4 @@
                     
                     IconRightWidget:
                         icon: "pen"
-                        on_release: app.change_text_data(profile_email)
+                        on_release: root.change_profile_data(profile_email)

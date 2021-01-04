@@ -35,7 +35,7 @@
     MDTextButton:
         text: "Resend code"
         pos_hint: {"center_x": 0.5, "center_y":0.45}
-        on_release: app.change_screen("verification")
+        on_release: app.screen_manager.change_screen("verification")
 
     MDLabel:
         text: "Never share your verification code to anyone."

@@ -8,7 +8,7 @@
             id:profile_bar
             title: "@username"
             size_hint: 1,0.08
-            left_action_items: [ ["arrow-left", lambda x:app.change_screen("home")]] 
+            left_action_items: [ ["arrow-left", lambda x:app.screen_manager.change_screen("home")]] 
             elevation: 5
         MDBoxLayout:
             # md_bg_color: app.theme_cls.primary_color
@@ -40,12 +40,12 @@
                             id:msg_textbox
                             multiline: True
                             max_text_length: 250
-                            on_text: app.chat_textbox()
+                            on_text: root.chat_textbox()
                         
                         
                     MDIconButton:
                         icon:"send"
-                        on_release: app.send_msg(msg_textbox.text)
+                        on_release: root.send_msg(msg_textbox.text)
 
                 
                 
