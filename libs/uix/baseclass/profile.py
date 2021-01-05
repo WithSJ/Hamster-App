@@ -1,5 +1,6 @@
-from main_imports import MDScreen,MDGridBottomSheet,OneLineTextDialog,MDDialog,MDFlatButton
 from libs.applibs import utils
+from main_imports import (MDDialog, MDFlatButton, MDGridBottomSheet, MDScreen,
+                          OneLineTextDialog)
 
 utils.load_kv("profile.kv")
 
