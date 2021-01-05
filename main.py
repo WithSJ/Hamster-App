@@ -36,6 +36,18 @@ class HamsterApp(MDApp):
     def __init__(self, **kwargs):
         super(HamsterApp, self).__init__(**kwargs)
         
+        self.APP_NAME = "Hamster"
+        self.COMPANY_NAME = "Hamster.org"
+
+        self.theme_cls.primary_palette = "Blue"
+        self.theme_cls.primary_hue = "500"
+
+        self.theme_cls.accent_palette = "Amber"
+        self.theme_cls.accent_hue = "500"
+
+        self.theme_cls.theme_style = "Light"
+
+        
     
     def chat_room(self,touch,a):
         """Switch to Chatroom. but username and chatroom username 
