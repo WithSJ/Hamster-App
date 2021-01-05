@@ -1,13 +1,10 @@
-#:import APP_NAME config.APP_NAME
-#:import COMPANY_NAME config.COMPANY_NAME
-
 <Home_Screen>:
     name: "home"
     BoxLayout:
         orientation:'vertical'
 
         MDToolbar:
-            title: APP_NAME
+            title: app.APP_NAME
             size_hint: 1,.08
             right_action_items: [ ["account", lambda x:app.screen_manager.change_screen("profile")]] 
             elevation: 5

@@ -1,5 +1,5 @@
-from main_imports import MDScreen,MDCard,MDLabel,MDSeparator
 from libs.applibs import utils
+from main_imports import MDCard, MDLabel, MDScreen, MDSeparator
 
 utils.load_kv("chat_room.kv")
 

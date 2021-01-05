@@ -2,6 +2,7 @@
 """This code to detect it's Android or not 
 if it's not android than app window size change in android phone size"""
 from kivy.utils import platform
+
 if platform != 'android':
     from kivy.config import Config
     Config.set("graphics","width",360)
@@ -12,20 +13,21 @@ if platform != 'android':
 """code for android keyboard. when in android keyboard show textbox 
 automatic go to top of keyboard so user can see when he type msg"""
 from kivy.core.window import Window
+
 Window.keyboard_anim_args = {"d":.2,"t":"linear"}
 Window.softinput_mode = "below_target"
 #--[End Soft_Keyboard code ]
 
-from main_imports import MDApp,TwoLineAvatarListItem,ImageLeftWidget
-
-from libs.uix.baseclass.root import Root
-from libs.uix.baseclass.login import Login_Screen
-from libs.uix.baseclass.signup import Signup_Screen
-from libs.uix.baseclass.forgot import Forgot_Screen
-from libs.uix.baseclass.verification import Verification_Screen
-from libs.uix.baseclass.home import Home_Screen
 from libs.uix.baseclass.chat_room import Chat_Room_Screen
+from libs.uix.baseclass.forgot import Forgot_Screen
+from libs.uix.baseclass.home import Home_Screen
+from libs.uix.baseclass.login import Login_Screen
 from libs.uix.baseclass.profile import Profile_Screen
+from libs.uix.baseclass.root import Root
+from libs.uix.baseclass.signup import Signup_Screen
+from libs.uix.baseclass.verification import Verification_Screen
+from main_imports import ImageLeftWidget, MDApp, TwoLineAvatarListItem
+
 
 class HamsterApp(MDApp):
     """
@@ -35,6 +37,18 @@ class HamsterApp(MDApp):
 
     def __init__(self, **kwargs):
         super(HamsterApp, self).__init__(**kwargs)
+        
+        self.APP_NAME = "Hamster"
+        self.COMPANY_NAME = "Hamster.org"
+
+        self.theme_cls.primary_palette = "Blue"
+        self.theme_cls.primary_hue = "500"
+
+        self.theme_cls.accent_palette = "Amber"
+        self.theme_cls.accent_hue = "500"
+
+        self.theme_cls.theme_style = "Light"
+
         
     
     def chat_room(self,touch,a):

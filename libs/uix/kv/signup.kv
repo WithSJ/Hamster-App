@@ -1,9 +1,7 @@
-#:import APP_NAME config.APP_NAME
-#:import COMPANY_NAME config.COMPANY_NAME
 <Signup_Screen>:
     name: "signup"
     MDLabel:
-        text: APP_NAME
+        text: app.APP_NAME
         halign: "center"
         pos_hint: {"center_y": .8}
         font_style: "H3"
@@ -51,7 +49,7 @@
         on_release: app.screen_manager.change_screen("login")
     
     MDLabel:
-        text: f"[font=Icons] {md_icons['copyright']}[/font]  [font=Roboto]{COMPANY_NAME} 2020[/font]"
+        text: f"[font=Icons] {md_icons['copyright']}[/font]  [font=Roboto]{app.COMPANY_NAME} 2020[/font]"
         markup: True
         halign: "center"
         pos_hint: {"center_y":0.05}
