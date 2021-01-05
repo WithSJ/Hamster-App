@@ -1,5 +1,6 @@
-from libs.applibs import utils
 from main_imports import BoxLayout
+from libs.applibs import utils
+
 
 utils.load_kv("ui_class.kv")
 

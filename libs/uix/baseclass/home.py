@@ -1,5 +1,5 @@
-from libs.applibs import utils
 from main_imports import ImageLeftWidget, MDScreen, TwoLineAvatarListItem
+from libs.applibs import utils
 
 utils.load_kv("home.kv")
 
