@@ -16,7 +16,7 @@ class Home_Screen(MDScreen):
         twolineW= TwoLineAvatarListItem(text=f"{search_field}",
             secondary_text=f"@{search_field}")
 
-        twolineW.add_widget(ImageLeftWidget(source="hamster_icon.png"))
+        twolineW.add_widget(ImageLeftWidget(source="assets//img//hamster_icon.png"))
         
         self.ids.search_items.add_widget(twolineW)
         # #  ----- ] end dummy search

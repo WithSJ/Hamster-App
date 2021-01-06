@@ -62,7 +62,7 @@ class HamsterApp(MDApp):
             secondary_text="@username",
             on_touch_up=self.chat_room)
 
-        twolineW.add_widget(ImageLeftWidget(source="hamster_icon.png"))
+        twolineW.add_widget(ImageLeftWidget(source="assets//img//hamster_icon.png"))
         
         self.screen_manager.get_screen("home").ids.chat_tab.add_widget(twolineW)
         #  ----- ] end dummy chats
