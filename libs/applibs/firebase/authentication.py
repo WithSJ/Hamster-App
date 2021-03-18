@@ -8,28 +8,36 @@ def SignUp(email,password,username,fullname):
     email = email.lower()
 
     if not Validator.isValidEmail(email):
-        return {"message":"Not a valid email."}
+        return {"ERROR": True,
+            "MESSAGE":"Not a valid email."
+            }
 
     if not Validator.isValidPassword(password):
-        return {"message":"Not a valid password."}
+        return {"ERROR": True,
+            "MESSAGE":"Not a valid password."}
 
     try:
         user=Auth.create_user_with_email_and_password(email,password)
         Auth.send_email_verification(user["idToken"])
         CreateNewUser(user["localId"],fullname=fullname,username=username)
         
-        return {"message":"Account created. Check your email for verification."}
+        return {"ERROR": False,
+            "MESSAGE":"Account created. Check your email for verification."}
     except:
-        return {"message":"EMAIL EXISTS"}
+        return {"ERROR": True,
+            "MESSAGE":"Email exist."}
     
 def Login(email,password):
     email = email.lower()
 
     if not Validator.isValidEmail(email):
-        return {"message":"Not a valid email."}
+        return {"ERROR": True,
+            "MESSAGE":"Not a valid email."}
 
     if not Validator.isValidPassword(password):
-        return {"message":"Not a valid password."}
+        return {"ERROR": True,
+            "MESSAGE":"Not a valid password."
+            }
 
     try:
         login_user = Auth.sign_in_with_email_and_password(email,password)
@@ -39,21 +47,30 @@ def Login(email,password):
 
         if user.emailVerified != True:
             Auth.send_email_verification(user.idToken)
-            return {"message":"Email not verified. Check your email."}
+            return {"ERROR": True,
+                "MESSAGE":"Email not verified. Check your email."}
 
-        return {"message":"Login Successfull",
-                "userData":user}
+        return {"ERROR": False,
+            "MESSAGE":"Login Successfull",
+            "USERDATA":user}
     except:
-        return {"message":"INVALID EMAIL or PASSWORD "}
+        return {"ERROR": True,
+            "MESSAGE":"Invalid email or password. "
+            }
     
 def PasswordReset(email):
     email = email.lower()
     
     if not Validator.isValidEmail(email):
-        return {"message":"Not a valid email."}
+        return {"ERROR": True,
+            "MESSAGE":"Not a valid email."
+            }
 
     try:
         Auth.send_password_reset_email(email)
-        return {"message":"Check email for reset password."}
+        return {"ERROR": False,
+            "MESSAGE":"Check email for reset password."}
     except:
-        return {"message":"EMAIL NOT FOUND"}
+        return {"ERROR": True,
+            "MESSAGE":"Email not found."
+            }
