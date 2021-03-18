@@ -45,7 +45,7 @@
         text: "Sign up"
         pos_hint: {"center_x": 0.5, "center_y":0.31}
         size_hint: .7,0.05
-        on_release: print("SignUP")
+        on_release: root.signup(email.text,fullname.text,username.text,password.text)
     
     MDTextButton:
         text: f"[color=#000000]Have an account?[/color] Log in"
