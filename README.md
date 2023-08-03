@@ -1,3 +1,3 @@
 # Hamster-App 
 
-Chat Appliction UI 
+Chat Application UI
